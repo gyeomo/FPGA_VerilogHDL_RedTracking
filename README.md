@@ -18,15 +18,15 @@ Since RGB is affected by illumination, it is converted to HSV and only the color
 
 FPGA_Processing.v introduces binarization to make 1 for red and 0 for other colors. The pixel values ​​of the binarized image are entered into Search.v in a streaming fashion.
 
-Search.v performs morphology operations to track red objects. Morphology operations remove noise and allow more accurate identification of red objects.
+1. Search.v performs morphology operations to track red objects. Morphology operations remove noise and allow more accurate identification of red objects.
 
-After that, we used an algorithm that transforms the MeanShift algorithm to the FPGA. Check whether each pixel is 1 or 0 according to the flow of data.
+2. After that, we used an algorithm that transforms the MeanShift algorithm to the FPGA. Check whether each pixel is 1 or 0 according to the flow of data.
 
-If the value of 1 is checked consecutively, put the value into Buffer. The next row (next row) of pixels is also checked.
+3. If the value of 1 is checked consecutively, put the value into Buffer. The next row (next row) of pixels is also checked.
 
-If the value of 1 is no longer available, the X axis coordinates are obtained from the first and last values ​​of the buffer.
+4. If the value of 1 is no longer available, the X axis coordinates are obtained from the first and last values ​​of the buffer.
 
-Since we made several buffers, we get the Y axis coordinates through the first buffer and the last buffer.
+5. Since we made several buffers, we get the Y axis coordinates through the first buffer and the last buffer.
 
 This gives X and Y of the red object.
 
